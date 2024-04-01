@@ -1,4 +1,5 @@
-# My-QuizApp
+## Online Quiz App with Firebase
+
 Create an online quiz app using Firebase in Android Studio, including setting up the UI, displaying dynamic questions, tracking progress, and displaying the final score.
 
 🔥 Creating a dynamic quiz app with Firebase realtime database allows for engaging user interface and multiple quiz models and questions.
