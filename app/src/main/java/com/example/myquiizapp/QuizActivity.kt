@@ -9,10 +9,8 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myquiizapp.databinding.ActivityMainBinding
 import com.example.myquiizapp.databinding.ActivityQuiizBinding
 import com.example.myquiizapp.databinding.ScoreDialogBinding
-import kotlin.math.min
 
 class QuizActivity :AppCompatActivity(), View.OnClickListener{
 

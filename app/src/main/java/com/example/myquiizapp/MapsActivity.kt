@@ -1,4 +1,5 @@
 package com.example.myquiizapp
+
 import android.Manifest
 import android.content.ContentValues.TAG
 import android.content.pm.PackageManager
@@ -20,6 +21,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import kotlin.random.Random
 import java.util.*
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLocationChangeListener, GoogleMap.OnMapClickListener,
@@ -39,7 +41,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLoca
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_maps2)
+        setContentView(R.layout.activity_maps)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         requestPermission()
@@ -89,14 +91,84 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLoca
 
             return
         }
+
         mMap.isMyLocationEnabled = true
         mMap.setOnMyLocationChangeListener(this)
+
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         getMyLocation()
         mMap.setOnMapClickListener(this)
+        // Une fois l'utilisateur connecté
+
+        val currentUser = FirebaseAuth.getInstance().currentUser
+
+        if (currentUser != null) {
+            // L'utilisateur est connecté
+
+            val userId = currentUser.uid // Récupérer l'ID de l'utilisateur
+            val userEmail = currentUser.email // Récupérer l'email de l'utilisateur
+            Toast.makeText(this@MapsActivity, userEmail+"L'ID :: "+userId, Toast.LENGTH_LONG).show()
+            val firestore = FirebaseFirestore.getInstance()
+            val userRef = firestore.collection("users").document(currentUser?.uid ?: "")
+            //val fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+            if (ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                return
+            }
+            fusedLocationClient.lastLocation
+                .addOnSuccessListener { location: Location? ->
+                    val userLocation = hashMapOf(
+                        "latitude" to location?.latitude,
+                        "longitude" to location?.longitude
+                    )
+                    userRef.set(userLocation, SetOptions.merge())
+                        .addOnSuccessListener {
+                            Log.d(TAG, "Location updated successfully")
+                        }
+                        .addOnFailureListener { e ->
+                            Log.w(TAG, "Error updating location", e)
+                        }
+                }
+            // Vous pouvez également récupérer d'autres informations sur l'utilisateur, comme son nom, si vous avez mis à jour ces informations dans Firebase Authentication.
+        } else {
+            Toast.makeText(this@MapsActivity, "Je peux pas voire L'user courent", Toast.LENGTH_LONG).show()
+
+        }
+        // Insérez le code ici pour récupérer les positions des utilisateurs depuis Firestore
+        val userLocationsRef = FirebaseFirestore.getInstance().collection("users")
+        userLocationsRef.addSnapshotListener { snapshot, e ->
+            if (e != null) {
+                Log.w(TAG, "Listen failed.", e)
+                return@addSnapshotListener
+            }
+
+            for (doc in snapshot!!) {
+                val latitude = doc.getDouble("latitude")
+                val longitude = doc.getDouble("longitude")
+                if (latitude != null && longitude != null) {
+                    val randomNumber = Random.nextInt(101)
+
+                    // Ajouter un marqueur pour chaque position sur la carte
+                    val markerOptions = MarkerOptions().position(LatLng(latitude, longitude)).title(" Score :"+randomNumber.toString()+"points")
+                    mMap.addMarker(markerOptions)
+                }
+            }
+        }
+
+
+
+
+
+
     }
 
     override fun onMyLocationChange(location: Location) {

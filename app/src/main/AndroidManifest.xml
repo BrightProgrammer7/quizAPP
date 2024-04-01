@@ -30,12 +30,8 @@
         -->
         <meta-data
                 android:name="com.google.android.geo.API_KEY"
-                android:value="YOUR_API_KEY"/>
+                android:value="AIzaSyCVq5vMn-RBUGGaMOP7Z2e0PrRkcoAPoGk"/>
 
-        <activity
-                android:name=".MapsActivity3"
-                android:exported="false"
-                android:label="@string/title_activity_maps3"/>
         <activity
                 android:name=".SignIn"
                 android:exported="false"/>
@@ -45,10 +41,7 @@
         <activity
                 android:name=".MainActivity"
                 android:exported="false"/>
-        <activity
-                android:name=".MapsActivity2"
-                android:exported="false"
-                android:label="@string/title_activity_maps2"/>
+
         <activity
                 android:name=".MapsActivity"
                 android:exported="false"

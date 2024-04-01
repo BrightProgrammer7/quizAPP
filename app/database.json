@@ -1,0 +1,98 @@
+[
+  {
+    "id": "AI_Quiz_001",
+    "title": "Artificial Intelligence Quiz",
+    "subtitle": "Test your knowledge of AI!",
+    "time": "45",
+    "questionList": [
+      {
+        "question": "What does AI stand for?",
+        "options": [
+          "Artificial Intelligence",
+          "Advanced Interface",
+          "Automated Interaction",
+          "Algorithmic Interpretation"
+        ],
+        "correct": "Artificial Intelligence"
+      },
+      {
+        "question": "Who coined the term 'Artificial Intelligence'?",
+        "options": [
+          "Alan Turing",
+          "John McCarthy",
+          "Herbert Simon",
+          "Marvin Minsky"
+        ],
+        "correct": "John McCarthy"
+      },
+      {
+        "question": "What is the concept of 'Machine Learning'?",
+        "options": [
+          "Machines learning from their own experiences",
+          "Machines being programmed to learn from data",
+          "Machines imitating human intelligence",
+          "Machines learning from human instructions"
+        ],
+        "correct": "Machines being programmed to learn from data"
+      },
+      {
+        "question": "Which programming language is commonly used in AI development?",
+        "options": [
+          "Java",
+          "Python",
+          "C++",
+          "JavaScript"
+        ],
+        "correct": "Python"
+      }
+    ]
+  },
+  {
+    "id": "LLM_NLP_Quiz_001",
+    "title": "LLM and NLP Quiz",
+    "subtitle": "Test your knowledge of Large Language Models and Natural Language Processing!",
+    "time": "30 minutes",
+    "questionList": [
+      {
+        "question": "What is a Large Language Model (LLM)?",
+        "options": [
+          "A model that can understand and generate human-like text",
+          "A model used for image recognition",
+          "A model for speech recognition",
+          "A model for video processing"
+        ],
+        "correct": "A model that can understand and generate human-like text"
+      },
+      {
+        "question": "Which of the following is a well-known Large Language Model developed by OpenAI?",
+        "options": [
+          "BERT",
+          "GPT-3",
+          "ELMo",
+          "Word2Vec"
+        ],
+        "correct": "GPT-3"
+      },
+      {
+        "question": "What is Natural Language Processing (NLP)?",
+        "options": [
+          "A field of AI concerned with the interaction between computers and humans through natural language",
+          "A method for processing images",
+          "A technique for analyzing video content",
+          "A system for generating audio"
+        ],
+        "correct": "A field of AI concerned with the interaction between computers and humans through natural language"
+      },
+      {
+        "question": "Which of the following is not a common task in NLP?",
+        "options": [
+          "Text classification",
+          "Machine translation",
+          "Speech recognition",
+          "Stock market prediction"
+        ],
+        "correct": "Stock market prediction"
+      }
+    ]
+  }
+]
